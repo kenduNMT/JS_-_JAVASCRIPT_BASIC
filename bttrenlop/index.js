@@ -21,6 +21,9 @@ var n = prompt("Nhập vào số nguyên dương n:");
 console.log("Số Fibonacci thứ " + n + " là: " + fibonacci(n));
 
 function reverseNumber(n) {
+    if (n <= 0) {
+        return "Vui lòng nhập một số nguyên dương.";
+    }
     let reversed = 0;
     while (n > 0) {
         reversed = reversed * 10 + n % 10;
