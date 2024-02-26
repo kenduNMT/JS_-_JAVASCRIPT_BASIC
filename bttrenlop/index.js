@@ -17,5 +17,17 @@ function fibonacci(n) {
     }
 }
 
-let n = prompt("Nhập vào số nguyên dương n:");
+var n = prompt("Nhập vào số nguyên dương n:");
 console.log("Số Fibonacci thứ " + n + " là: " + fibonacci(n));
+
+function reverseNumber(n) {
+    let reversed = 0;
+    while (n > 0) {
+        reversed = reversed * 10 + n % 10;
+        n = Math.floor(n / 10);
+    }
+    return reversed;
+}
+
+var n = prompt("Nhập vào một số nguyên dương:");
+console.log("Số đảo ngược của " + n + " là: " + reverseNumber(n));
