@@ -3,7 +3,7 @@ function fibonacci(n) {
     if (n <= 0) {
         return "Vui lòng nhập một số nguyên dương.";
     } else if (n == 1) {
-        return a;
+        return b;
     } else if (n == 2) {
         return b;
     } else {
