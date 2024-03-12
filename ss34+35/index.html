@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Btvn</title>
+    <style>
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="bt1.js"></script>
+    <script src="bt2.js"></script>
+    <button onclick="chaoMung()">Nhấn vào đây</button>
+    <script src="bt3.js"></script>
+    <p id="dongChu1">Đây là dòng chữ ban đầu</p>
+    <button onclick="thayDoiNoiDung()">Nhấn vào đây để thay đổi nội dung</button>
+    <script src="bt4.js"></script>
+    <p id="dongChu2">Đây là dòng chữ ban đầu</p>
+    <button onclick="thayDoiStyle()">Nhấn vào đây để thay đổi style</button>
+    <script src="bt5.js"></script>
+    <script src="bt6.js"></script>
+    <input type="text" id="nhapLieu" placeholder="Nhập tên của bạn tại đây">
+    <button onclick="themVaoDanhSach()">Thêm vào danh sách</button>
+    <ul id="danhSach"></ul>
+    <script src="bt7.js"></script>
+    <input type="text" id="nhapLieu2" placeholder="Nhập tên của bạn tại đây">
+    <button onclick="themVaoBang()">Thêm vào bảng</button>
+    <table id="bang">
+        <tr>
+            <th>Cell 1</th>
+            <th>Cell 2</th>
+            <th>Cell 3</th>
+        </tr>
+    </table>
+    <script src="bt8.js"></script>
+    <table id="bang">
+        <tr>
+            <td>Cell 1 row 1</td>
+            <td>Cell 2 row 1</td>
+            <td>Cell 3 row 1</td>
+            <td><button onclick="xoaHang(this)">Xóa</button></td>
+        </tr>
+        <tr>
+            <td>Cell 1 row 1</td>
+            <td>Cell 2 row 2</td>
+            <td>Cell 3 row 3</td>
+            <td><button onclick="xoaHang(this)">Xóa</button></td>
+        </tr>
+        <tr>
+            <td>Cell 1 row 3</td>
+            <td>Cell 2 row 3</td>
+            <td>Cell 3 row 3</td>
+            <td><button onclick="xoaHang(this)">Xóa</button></td>
+        </tr>
+    </table>
+    <script src="bt9.js"></script>
+    <input type="text" id="nhapLieu3">
+    <button onclick="chinhSuaMuc()">Chỉnh sửa mục</button>
+    <table id="bang">
+        <tr>
+            <td>Nguyễn Văn A</td>
+            <td><button onclick="chinhSua(this)">Chỉnh sửa</button></td>
+        </tr>
+        <tr>
+            <td>Vũ Thị B</td>
+            <td><button onclick="chinhSua(this)">Chỉnh sửa</button></td>
+        </tr>
+        <tr>
+            <td>Nguyễn Minh C</td>
+            <td><button onclick="chinhSua(this)">Chỉnh sửa</button></td>
+        </tr>
+</body>
+
+</html>
