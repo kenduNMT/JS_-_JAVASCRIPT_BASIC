@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tạo form</title>
+    <style>
+        #orderForm {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        #orderForm fieldset {
+            grid-column: span 1;
+            margin-bottom: 20px;
+        }
+
+        #orderForm fieldset:nth-child(odd) {
+            margin-right: 0;
+        }
+
+        #orderForm button {
+            grid-column: span 2;
+        }
+
+        #orderForm button[type="submit"] {
+            justify-self: center;
+        }
+
+        #orderForm button[type="reset"] {
+            justify-self: center;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="orderForm">
+        <fieldset>
+            <legend>Thông tin người mua</legend>
+            <label for="fullName">Họ và tên:</label>
+            <input type="text" id="fullName" name="fullName" required /><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required /><br>
+
+            <label for="phone">Điện thoại:</label>
+            <input type="tel" id="phone" name="phone" required /><br>
+
+            <label for="orderDate">Ngày đặt (dd-mm-yyyy):</label>
+            <input type="text" id="orderDate" name="orderDate" pattern="\d{2}-\d{2}-\d{4}" required /><br>
+
+            <label for="paymentMethod">Phương thức thanh toán:</label>
+            <select id="paymentMethod" name="paymentMethod" required>
+                <option value="">Chọn phương thức thanh toán</option>
+                <option value="cash">Tiền mặt</option>
+                <option value="card">Thẻ</option>
+            </select><br />
+
+            <label for="address">Địa chỉ:</label>
+            <input type="text" id="address" name="address" required></input><br>
+
+            <input type="checkbox" id="sendEmail" name="sendEmail">
+            <label for="sendEmail">Gửi mail cho tôi</label><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Thông tin người nhận</legend>
+            <input type="checkbox" id="copyInfoCheckbox">
+            <label for="copyInfoCheckbox">Tôi là người nhận</label><br>
+            <label for="recipientName">Họ và tên:</label>
+            <input type="text" id="recipientName" name="recipientName" required /><br>
+
+            <label for="recipientEmail">Email:</label>
+            <input type="email" id="recipientEmail" name="recipientEmail" required /><br>
+
+            <label for="recipientPhone">Điện thoại:</label>
+            <input type="tel" id="recipientPhone" name="recipientPhone" required /><br>
+
+            <label for="recipientAddress">Địa chỉ:</label>
+            <input type="text" id="recipientAddress" name="recipientAddress" required></input><br>
+
+            <label for="note">Ghi chú</label>
+            <textarea id="note" name="note"></textarea><br>
+        </fieldset>
+
+        <button type="submit">Đặt hàng</button>
+        <button type="reset">Nhập lại</button>
+    </form>
+
+    <script>
+        document
+            .getElementById("orderForm")
+            .addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                var fullName = document.getElementById("fullName").value;
+                var email = document.getElementById("email").value;
+                var phone = document.getElementById("phone").value;
+                var orderDate = document.getElementById("orderDate").value;
+                var paymentMethod = document.getElementById("paymentMethod").value;
+                var address = document.getElementById("address").value;
+                var recipientName = document.getElementById("recipientName").value;
+                var recipientEmail = document.getElementById("recipientEmail").value;
+                var recipientPhone = document.getElementById("recipientPhone").value;
+                var recipientAddress =
+                    document.getElementById("recipientAddress").value;
+                var note = document.getElementById("note").value;
+
+                if (
+                    fullName.trim() === "" ||
+                    email.trim() === "" ||
+                    phone.trim() === "" ||
+                    orderDate.trim() === "" ||
+                    paymentMethod.trim() === "" ||
+                    address.trim() === "" ||
+                    recipientName.trim() === "" ||
+                    recipientEmail.trim() === "" ||
+                    recipientPhone.trim() === "" ||
+                    recipientAddress.trim() === ""
+                ) {
+                    alert("Vui lòng điền đầy đủ thông tin.");
+                    return;
+                }
+
+                if (!isValidDate(orderDate)) {
+                    alert(
+                        "Ngày đặt không hợp lệ. Vui lòng nhập theo định dạng dd-mm-yyyy."
+                    );
+                    return;
+                }
+
+                if (!isValidEmail(email) || !isValidEmail(recipientEmail)) {
+                    alert("Email không hợp lệ. Vui lòng kiểm tra lại.");
+                    return;
+                }
+
+                if (document.getElementById("sendEmail").checked) {
+                    alert("Đặt hàng thành công, email đã gửi tới cho quý khách.");
+                } else {
+                    alert("Đặt hàng thành công.");
+                }
+            });
+
+        document
+            .getElementById("copyInfoCheckbox")
+            .addEventListener("change", function () {
+                if (this.checked) {
+                    document.getElementById("recipientName").value = document
+                        .getElementById("fullName")
+                        .value.toUpperCase();
+                    document.getElementById("recipientEmail").value =
+                        document.getElementById("email").value;
+                    document.getElementById("recipientPhone").value =
+                        document.getElementById("phone").value;
+                    document.getElementById("recipientAddress").value =
+                        document.getElementById("address").value;
+                }
+            });
+
+        function isValidDate(dateString) {
+            var regex = /^\d{2}-\d{2}-\d{4}$/;
+            if (!regex.test(dateString)) return false;
+            var parts = dateString.split("-");
+            var day = parseInt(parts[0], 10);
+            var month = parseInt(parts[1], 10);
+            var year = parseInt(parts[2], 10);
+            if (year < 1000 || year > 3000 || month == 0 || month > 12)
+                return false;
+            var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+                monthLength[1] = 29;
+            return day > 0 && day <= monthLength[month - 1];
+        }
+
+        function isValidEmail(email) {
+            var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+    </script>
+</body>
+
+</html>
